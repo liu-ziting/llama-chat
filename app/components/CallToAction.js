@@ -1,33 +1,43 @@
-import CTAGooBG from "../../public/cta-goo-bg.webp";
+import { useState } from 'react'
 
 export default function CallToAction() {
-  // todo: make this real goo
-  return (
-    <div
-      className="guide-footer-cta sm:flex items-center bg-pink-600 justify-between p-12 space-y-4"
-      style={{
-        background: `url(${CTAGooBG.src}) no-repeat center center`,
-        backgroundSize: "cover",
-        position: "relative",
-        zIndex: 1,
-      }}
-    >
-      <div>
-        <h1 className="text-2xl sm:text-3xl text-white font-bold">
-          Run Meta Llama 3 with an API
-        </h1>
-        <p className="text-white mx-auto mt-2 sm:mt-0">
-          Replicate lets you run language models in the cloud with one line of
-          code.
-        </p>
-      </div>
+    const [isVisible, setIsVisible] = useState(true)
 
-      <a
-        className="bg-black text-white text-small inline-block px-5 py-3 flex-none no-underline"
-        href="https://replicate.com/blog/run-llama-3-with-an-api?utm_source=project&utm_campaign=llama2ai"
-      >
-        Get started &rarr;
-      </a>
-    </div>
-  );
+    const handleClose = () => {
+        setIsVisible(false)
+    }
+
+    return (
+        <>
+            {isVisible && (
+                <div className="flex items-center justify-between gap-4 bg-indigo-600 px-4 py-3 text-white">
+                    <p className="text-sm font-medium">
+                        More websites to go to?
+                        <a href="https://tools.smartai.wtf" target="_blank" className="px-2 inline-block underline">
+                            SmartAI
+                        </a>
+                    </p>
+
+                    <button
+                        aria-label="Dismiss"
+                        className="shrink-0 rounded-lg bg-black/10 p-1 transition hover:bg-black/20"
+                        onClick={handleClose}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            )}
+        </>
+    )
 }

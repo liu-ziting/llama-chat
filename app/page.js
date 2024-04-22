@@ -223,7 +223,7 @@ export default function HomePage() {
 
     return (
         <>
-            {/* <CallToAction /> */}
+            <CallToAction />
             <nav className="max-w-2xl mx-auto px-4 mt-8 flex items-center">
                 <div className="font-semibold text-gray-500 sm:text-center">
                     <Dropdown models={MODELS} selectedModel={model} setModel={setModel} />
