@@ -194,29 +194,6 @@ export default function SlideOver({
                                                                                 水泥封心
                                                                             </p>
                                                                         </label>
-
-                                                                        <label
-                                                                            htmlFor="Snfx"
-                                                                            className={`flex cursor-pointer items-center justify-center rounded-md border px-3 py-2 text-gray-900 hover:border-gray-200 ${
-                                                                                systemPrompt.includes('水泥封心')
-                                                                                    ? 'border-blue-500 bg-blue-500 text-white'
-                                                                                    : 'border-gray-100 bg-white'
-                                                                            }`}
-                                                                        >
-                                                                            <input
-                                                                                type="radio"
-                                                                                name="ColorOption"
-                                                                                value="Snfx"
-                                                                                id="Snfx"
-                                                                                className="sr-only"
-                                                                                checked={systemPrompt.includes(
-                                                                                    '水泥封心'
-                                                                                )}
-                                                                                onChange={() =>
-                                                                                    setSystemPrompt(/* Your prompt text for "水泥封心" goes here */)
-                                                                                }
-                                                                            />
-                                                                        </label>
                                                                     </div>
 
                                                                     <div>
