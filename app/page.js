@@ -87,6 +87,29 @@ const metricsReducer = (state, action) => {
     }
 }
 
+function usePersistedState(key, defaultValue) {
+    const [state, setState] = useState(() => {
+        if (typeof window === 'undefined') {
+            return defaultValue
+        }
+
+        const saved = window.localStorage.getItem(key)
+        try {
+            return saved !== null ? JSON.parse(saved) : defaultValue
+        } catch (error) {
+            return saved !== null ? saved : defaultValue
+        }
+    })
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.localStorage.setItem(key, JSON.stringify(state))
+        }
+    }, [key, state])
+
+    return [state, setState]
+}
+
 export default function HomePage() {
     const MAX_TOKENS = 8192
     const bottomRef = useRef(null)
@@ -95,19 +118,18 @@ export default function HomePage() {
     const [error, setError] = useState(null)
     const [starting, setStarting] = useState(false)
 
-    //   Llama params
-    const [model, setModel] = useState(MODELS[0]) // default to 70B
-    const [systemPrompt, setSystemPrompt] = useState('You are a helpful assistant.')
-    const [temp, setTemp] = useState(0.75)
-    const [topP, setTopP] = useState(0.9)
-    const [maxTokens, setMaxTokens] = useState(800)
+    // Llama params
+    const [model, setModel] = usePersistedState('model', MODELS[0])
+    const [systemPrompt, setSystemPrompt] = usePersistedState('systemPrompt', 'You are a helpful assistant.')
+    const [temp, setTemp] = usePersistedState('temp', 0.75)
+    const [topP, setTopP] = usePersistedState('topP', 0.9)
+    const [maxTokens, setMaxTokens] = usePersistedState('maxTokens', 800)
 
-    //  Llava params
-    const [image, setImage] = useState(null)
+    // Llava params
+    const [image, setImage] = usePersistedState('image', null)
 
     // Salmonn params
-    const [audio, setAudio] = useState(null)
-
+    const [audio, setAudio] = usePersistedState('audio', null)
     const [metrics, dispatch] = useReducer(metricsReducer, {
         startedAt: null,
         firstMessageAt: null,
