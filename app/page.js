@@ -8,7 +8,7 @@ import EmptyState from './components/EmptyState'
 import QueuedSpinner from './components/QueuedSpinner'
 import CallToAction from './components/CallToAction'
 import Dropdown from './components/Dropdown'
-import { Cog6ToothIcon, CodeBracketIcon } from '@heroicons/react/20/solid'
+import { Cog6ToothIcon, ChatBubbleLeftEllipsisIcon } from '@heroicons/react/20/solid'
 import { useCompletion } from 'ai/react'
 import { Toaster, toast } from 'react-hot-toast'
 import { LlamaTemplate, Llama3Template } from '../src/prompt_template'
@@ -232,6 +232,17 @@ export default function HomePage() {
                 </div>
                 <div className="flex-grow"></div>
                 <div className="justify-end">
+                    <a
+                        className="inline-flex items-center px-3 py-2 mr-3 text-sm font-semibold text-gray-700 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        href="https://discord.com/invite/mc6hPwPqZ7"
+                        target="_blank"
+                    >
+                        <ChatBubbleLeftEllipsisIcon
+                            className="w-5 h-5 text-gray-500 sm:mr-2 group-hover:text-gray-900"
+                            aria-hidden="true"
+                        />{' '}
+                        <span className="hidden sm:inline">Discord</span>
+                    </a>
                     <button
                         type="button"
                         className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
