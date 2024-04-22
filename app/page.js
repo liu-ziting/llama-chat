@@ -96,17 +96,33 @@ export default function HomePage() {
     const [starting, setStarting] = useState(false)
 
     //   Llama params
-    const [model, setModel] = useState(MODELS[0]) // default to 70B
-    const [systemPrompt, setSystemPrompt] = useState('You are a helpful assistant.')
-    const [temp, setTemp] = useState(0.75)
-    const [topP, setTopP] = useState(0.9)
-    const [maxTokens, setMaxTokens] = useState(800)
+    // const [model, setModel] = useState(MODELS[0]) // default to 70B
+    // const [systemPrompt, setSystemPrompt] = useState('You are a helpful assistant.')
+    // const [temp, setTemp] = useState(0.75)
+    // const [topP, setTopP] = useState(0.9)
+    // const [maxTokens, setMaxTokens] = useState(800)
+    const [model, setModel] = useState(() => JSON.parse(localStorage.getItem('model')) || MODELS[0]) // default to 70B
+    const [systemPrompt, setSystemPrompt] = useState(
+        () => localStorage.getItem('systemPrompt') || 'You are a helpful assistant.'
+    )
+    const [temp, setTemp] = useState(() => localStorage.getItem('temp') || 0.75)
+    const [topP, setTopP] = useState(() => localStorage.getItem('topP') || 0.9)
+    const [maxTokens, setMaxTokens] = useState(() => localStorage.getItem('maxTokens') || 800)
 
     //  Llava params
     const [image, setImage] = useState(null)
 
     // Salmonn params
     const [audio, setAudio] = useState(null)
+
+    useEffect(() => {
+        // Store the current settings to localStorage on change
+        localStorage.setItem('model', JSON.stringify(model))
+        localStorage.setItem('systemPrompt', systemPrompt)
+        localStorage.setItem('temp', temp)
+        localStorage.setItem('topP', topP)
+        localStorage.setItem('maxTokens', maxTokens)
+    }, [model, systemPrompt, temp, topP, maxTokens])
 
     const [metrics, dispatch] = useReducer(metricsReducer, {
         startedAt: null,
